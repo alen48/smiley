@@ -67,17 +67,20 @@ calcHyperPeriod()
 {
 	int i = 1;
 	hyperPeriod = periods[0];
-	while (i < noOfTasks) 
+	while (i < noOfTasks) {
 		hyperPeriod = lcm(periods[i++], hyperPeriod);
+	}
 	return;
 }
 
 	void
 readTasks(char *inFile)
 {
+	//char *dir = "test/";
+	//strcat(dir, inFile);
 	fstream fileOp(inFile, ios_base::in);
 	fileOp >> maxNoOfProcessors >> maxCriticality >> noOfTasks;
-	if (maxNoOfProcessors < 0 || maxCriticality < 0 || noOfTasks < 0) {
+	if (maxNoOfProcessors <= 0 || maxCriticality <= 0 || noOfTasks <= 0) {
 		cout << "Invalid inputs.\n";
 		exit(0);
 	}
@@ -85,8 +88,7 @@ readTasks(char *inFile)
 	sysCriticality = maxCriticality;
 	int i = 0;
 	noOfLoTasks = 0;
-	while (i < noOfTasks)
-	{
+	while (i < noOfTasks) {
 		Task taskset;
 		taskset.taskNo = i;
 		fileOp >> taskset.arrivalT >> taskset.period >> taskset.taskCriticality;
@@ -311,7 +313,7 @@ calcSlack(Task *taskset, int noOfEdfTasks, double currTime, Job loQTop, priority
 	cout << "\n";
 	for(int i = 0; i < noOfEdfTasks; i++) {
 		if(taskset[i].taskCriticality >= sysCriticality){
-			double nextArrival = taskset[i].period * (floor ((currTime - taskset[i].arrivalT) / taskset[i].period) + 1);
+			double nextArrival = taskset[i].period * (floor((currTime - taskset[i].arrivalT) / taskset[i].period) + 1);
 
 			while(nextArrival <= loQTop.deadline) {
 				double currDeadline = nextArrival + taskset[i].deadline;
@@ -335,10 +337,10 @@ calcSlack(Task *taskset, int noOfEdfTasks, double currTime, Job loQTop, priority
 	}
 
 
-	for (int i = 0; i < noOfEdfTasks; i++){
+	for (int i = 0; i < noOfEdfTasks; i++) {
 		if (taskset[i].taskCriticality >= sysCriticality) {
-			double nextArrival= (floor(loQTop.deadline / taskset[i].period) + 1) * taskset[i].period;
-			while (nextArrival < maxDeadline){
+			double nextArrival = (floor(loQTop.deadline / taskset[i].period) + 1) * taskset[i].period;
+			while (nextArrival < maxDeadline) {
 				double currDeadline = nextArrival + taskset[i].deadline;
 				Job newJob;
 				newJob.taskNo = taskset[i].taskNo;
@@ -388,9 +390,10 @@ calcSlack(Task *taskset, int noOfEdfTasks, double currTime, Job loQTop, priority
 		}
 		// cout << "\ninter slack: " << slack << " " << "dynamicT: " << dynamicT;
 	}
-	if (dynamicT > loQTop.deadline)
+	if (dynamicT > loQTop.deadline) {
 		dynamicT = loQTop.deadline;
 	// cout << "\ndynamicT: " << dynamicT;
+	}
 	slack = slack + dynamicT - currTime;
 	printMutex.lock();
 	cout << "\nslack is : " << slack << "\n";
