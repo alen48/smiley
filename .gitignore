@@ -1,0 +1,18 @@
+# input, output and intermediate files
+input*
+output*
+
+# object files
+*.d
+*.o
+*.pyc
+
+# temp files
+*~
+*.swp
+
+#logs
+*.log
+
+# outputs
+multiproc
