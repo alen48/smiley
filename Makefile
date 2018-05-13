@@ -15,7 +15,9 @@ multiProcDriver.o : multiProc.h multiProcDriver.cc
 	$(CC) $(VER) $(CFLAGS) multiProcDriver.cc
 
 clean:
+	@echo Deleting binary files and intermediate files...
 	rm -f *.o *~ multiProc inputG inputP* outputP*
 
 tar:
+	@echo Compressing files...
 	tar cfv multiProc.tar multiProc.h multiProcMain.cc multiProcDriver.cc input

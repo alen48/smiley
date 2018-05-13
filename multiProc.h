@@ -1,3 +1,6 @@
+#ifndef MULTIPROC_H_
+#define MULTIPROC_H_
+
 #include <iostream>
 #include <fstream>
 #include <cstdio>
@@ -20,7 +23,7 @@ class Task {
 		double arrivalT;
 		int period;
 		int taskCriticality;
-		vector <double> execT;
+		std::vector <double> execT;
 		double deadline;
 		double taskUtil;
 		int processor;
@@ -53,11 +56,11 @@ extern int sysCriticality;
 extern int hyperPeriod;
 extern int maxCriticality;
 extern int loCriticality;
-extern vector<int> processorTasks;
-extern multimap<pair<double, double>, Task> orderedHiTasks;
-extern vector<Task> LoTasks;
+extern std::vector<int> processorTasks;
+extern std::multimap<pair<double, double>, Task> orderedHiTasks;
+extern std::vector<Task> LoTasks;
 extern Task *LoTaskset;
-extern priority_queue<Job> LoJobQ;
+extern std::priority_queue<Job> LoJobQ;
 extern double globalNextDecTime;
 extern int procExeCount;
 extern int procExeCountNext;
@@ -73,8 +76,8 @@ extern mutex minSlackMutex2;
 extern mutex printMutex;
 extern int loopCount1;
 extern int loopCount2;
-extern vector<int> decProc;
-extern vector<int> decProcNext;
+extern std::vector<int> decProc;
+extern std::vector<int> decProcNext;
 extern int decProcCount;
 extern int decProcCountNext;
 extern double minSlack;
@@ -115,5 +118,6 @@ extern void
 generateLoJobs(void); 
 
 extern double
-calcSlack(Task *, int, double, Job, priority_queue<Job>, priority_queue<Job>, int);
+calcSlack(Task *, int, double, Job, std::priority_queue<Job>, std::priority_queue<Job>, int);
 
+#endif

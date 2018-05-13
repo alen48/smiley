@@ -1,0 +1,45 @@
+Processor 0
+-----------
+
+Utilization : 0.666667
+Hyperperiod : 60
+
+The EDF schedule till hyperperiod is as follows:
+
+
+J_0,0		0 to 1
+J_1,0		1 to 4
+J*_LO_0,0	4 to 5
+J_LO_0,0	5 to 7
+J_0,1		7 to 8
+J_2,0		8 to 10
+J_LO_1,0	10 to 12
+J_0,2		12 to 13
+J*_1,1		13 to 15
+J_LO_0,1	15 to 18
+J_1,1		18 to 19
+J_0,3		19 to 20
+J_2,1		20 to 22
+J_LO_1,1	22 to 24
+J_0,4		24 to 25
+J_1,2		25 to 28
+J_0,5		28 to 29
+J*_2,2		29 to 30
+J_0,6		30 to 31
+J_2,2		31 to 32
+J*_LO_3,1	32 to 35
+J_LO_3,1	35 to 36
+J_1,3		36 to 39
+J_0,7		39 to 40
+J_0,8		40 to 41
+J_LO_1,3	41 to 43
+J_2,3		43 to 45
+J_1,4		45 to 48
+J_0,9		48 to 49
+J*_LO_3,2	49 to 50
+J_0,10		50 to 51
+J_LO_3,2	51 to 54
+J*_2,4		54 to 55
+J_2,4		55 to 56
+J_1,5		56 to 59
+J_0,11		59 to 60
