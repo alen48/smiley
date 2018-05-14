@@ -46,7 +46,7 @@ int minSlackProc;
 {
 	if (a.deadline != b.deadline)
 		return (a.deadline > b.deadline);
-	return (a.arrivalT > b.arrivalT);
+	return (a.currJob < b.currJob);
 }
 
 	int
@@ -265,6 +265,7 @@ generateLoJobs(void)
 				newJob.deadline = currTime + LoTaskset[j].deadline;
 				newJob.jobCriticality = LoTaskset[j].taskCriticality;
 				newJob.jobUtil = LoTaskset[j].taskUtil;
+				newJob.currJob = 0;
 				LoJobQ.push(newJob);
 			}
 			double calc = LoTaskset[j].period * (floor((currTime - LoTaskset[j].arrivalT) / LoTaskset[j].period) + 1);
@@ -324,6 +325,7 @@ calcSlack(Task *taskset, int noOfEdfTasks, double currTime, Job loQTop, std::pri
 				newJob.deadline = currDeadline;
 				newJob.jobCriticality = taskset[i].taskCriticality;
 				newJob.jobUtil = taskset[i].taskUtil;
+				newJob.currJob = 0;
 
 				if (newJob.deadline > maxDeadline && nextArrival < loQTop.deadline) {
 					maxDeadline = newJob.deadline;
@@ -350,6 +352,7 @@ calcSlack(Task *taskset, int noOfEdfTasks, double currTime, Job loQTop, std::pri
 				newJob.deadline = currDeadline;
 				newJob.jobCriticality = taskset[i].taskCriticality;
 				newJob.jobUtil = taskset[i].taskUtil;
+				newJob.currJob = 0;
 
 				type1.push_back(newJob);
 
@@ -456,7 +459,6 @@ executeEdf(int procNo)
 	i = 1;
 	double nextArrival, completionTime = 0.0, nextDecTime;
 	std::priority_queue<Job> readyQ;
-	//Task *currTask = new Task;
 
 	while (currTime < hyperPeriod) {
 
@@ -481,6 +483,7 @@ executeEdf(int procNo)
 				newJob.deadline = currTime + taskset[j].deadline;
 				newJob.jobCriticality = maxCriticality;
 				newJob.jobUtil = taskset[j].taskUtil;
+				newJob.currJob = 0;
 				readyQ.push(newJob);
 			}
 			double calc = taskset[j].period * (floor ((currTime - taskset[j].arrivalT) / taskset[j].period) + 1);
@@ -558,6 +561,7 @@ executeEdf(int procNo)
 					fileOut << "\nJ_LO_" << temp.taskNo << "," << temp.jobNo << "\t" << currTime << " to " << globalNextDecTime;
 				} else {
 					fileOut << "\nJ*_LO_" << temp.taskNo << "," << temp.jobNo << "\t" << currTime << " to " << globalNextDecTime;
+					temp.currJob = 1;
 					readyQ.push(temp);
 				}
 			} else {
@@ -565,6 +569,7 @@ executeEdf(int procNo)
 					fileOut << "\nJ_" << temp.taskNo << "," << temp.jobNo << "\t\t" << currTime << " to " << globalNextDecTime;
 				} else {
 					fileOut << "\nJ*_" << temp.taskNo << "," << temp.jobNo << "\t\t" << currTime << " to " << globalNextDecTime;
+					temp.currJob = 1;
 					readyQ.push(temp);
 				}
 			}

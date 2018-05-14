@@ -39,6 +39,7 @@ class Job {
 		int jobCriticality;
 		double deadline;
 		double jobUtil;
+		int currJob; // 1 if this job is currently being executed in a processor
 };
 
 class greater_than_key {
