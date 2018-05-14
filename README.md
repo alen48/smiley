@@ -1,2 +1,2 @@
 # smiley
-A new mixed criticality algorithm for multicore systems
+A mixed-criticality multicore scheduler.
