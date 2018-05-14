@@ -15,4 +15,5 @@ output*
 *.log
 
 # outputs
-multiproc
+multiProc
+*.out
