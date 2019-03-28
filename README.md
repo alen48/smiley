@@ -1,2 +1,2 @@
 # smiley
-A mixed-criticality multicore scheduler.
+A multicore scheduler for mixed-criticality realtime systems.
